@@ -2,6 +2,7 @@ package oncall.view;
 
 import java.util.List;
 import oncall.dto.MonthInputDTO;
+import oncall.dto.WorkersDTO;
 
 public class InputParser {
 
@@ -20,5 +21,9 @@ public class InputParser {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public WorkersDTO parseWorkersInput(String workersInput) {
+        return WorkersDTO.of(List.of(workersInput.split(INPUT_DELIMITER)));
     }
 }

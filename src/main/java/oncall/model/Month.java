@@ -12,7 +12,6 @@ public class Month {
     private static final int MIN_MONTH = 1;
     private static final int MAX_MONTH = 12;
     private static final List<String> DAYS_OF_WEEK = List.of("월", "화", "수", "목", "금", "토", "일");
-    private static final List<String> WEEKENDS = List.of("토", "일");
     private static final int NON_LEAP_YEAR = 2001;
     private static final int FIRST_DATE = 1;
 
@@ -30,7 +29,7 @@ public class Month {
                 .forEach(date -> {
                     int month = monthInputDTO.getMonth();
                     String dayOfWeek = getDayOfWeek(date, monthInputDTO.getFirstDayOfWeek());
-                    boolean isHoliday = isHoliday(dayOfWeek, month, date, holidayDTOs);
+                    boolean isHoliday = isHoliday(month, date, holidayDTOs);
                     days.add(Day.of(month, date, dayOfWeek, isHoliday));
                 });
 
@@ -58,9 +57,8 @@ public class Month {
         return DAYS_OF_WEEK.get(indexDayOfWeek);
     }
 
-    private static boolean isHoliday(String dayOfWeek, int month, int date, List<HolidayDTO> holidayDTOs) {
-        return WEEKENDS.contains(dayOfWeek) ||
-                holidayDTOs.stream().anyMatch(holiday -> holiday.getMonth() == month && holiday.getDate() == date);
+    private static boolean isHoliday(int month, int date, List<HolidayDTO> holidayDTOs) {
+        return holidayDTOs.stream().anyMatch(holiday -> holiday.getMonth() == month && holiday.getDate() == date);
     }
 
     public List<Day> getAllDays() {

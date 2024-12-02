@@ -19,25 +19,25 @@ public class MonthTest {
         assertThat(firstDay.getMonth()).isEqualTo(8);
         assertThat(firstDay.getDate()).isEqualTo(1);
         assertThat(firstDay.getDayOfWeek()).isEqualTo("화");
-        assertThat(firstDay.getHoliday()).isEqualTo(false);
+        assertThat(firstDay.isHoliday()).isEqualTo(false);
 
         Day secondDay = month.getAllDays().get(1);
         assertThat(secondDay.getMonth()).isEqualTo(8);
         assertThat(secondDay.getDate()).isEqualTo(2);
         assertThat(secondDay.getDayOfWeek()).isEqualTo("수");
-        assertThat(secondDay.getHoliday()).isEqualTo(false);
+        assertThat(secondDay.isHoliday()).isEqualTo(false);
 
         Day fifteenthDay = month.getAllDays().get(14);
         assertThat(fifteenthDay.getMonth()).isEqualTo(8);
         assertThat(fifteenthDay.getDate()).isEqualTo(15);
         assertThat(fifteenthDay.getDayOfWeek()).isEqualTo("화");
-        assertThat(fifteenthDay.getHoliday()).isEqualTo(true);
+        assertThat(fifteenthDay.isHoliday()).isEqualTo(true);
 
         Day lastDay = month.getAllDays().get(30);
         assertThat(lastDay.getMonth()).isEqualTo(8);
         assertThat(lastDay.getDate()).isEqualTo(31);
         assertThat(lastDay.getDayOfWeek()).isEqualTo("목");
-        assertThat(lastDay.getHoliday()).isEqualTo(false);
+        assertThat(lastDay.isHoliday()).isEqualTo(false);
 
         assertThatThrownBy(() -> month.getAllDays().get(31)).isInstanceOf(IndexOutOfBoundsException.class);
     }
