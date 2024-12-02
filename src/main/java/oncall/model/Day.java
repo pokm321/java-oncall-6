@@ -1,10 +1,6 @@
 package oncall.model;
 
-import java.util.List;
-
 public class Day {
-
-    private static final List<String> DAYS_OF_WEEK = List.of("월", "화", "수", "목", "금", "토", "일");
 
     private final int month;
     private final int date;
@@ -12,25 +8,15 @@ public class Day {
     private boolean isHoliday;
     private String worker;
 
-    private Day(int month, int date, String dayOfWeek) {
+    private Day(int month, int date, String dayOfWeek, boolean isHoliday) {
         this.month = month;
         this.date = date;
         this.dayOfWeek = dayOfWeek;
+        this.isHoliday = isHoliday;
     }
 
-    public static Day of(int month, int date, String dayOfWeek) {
-        validate(month, date, dayOfWeek);
-        return new Day(month, date, dayOfWeek);
-    }
-
-    private static void validate(int month, int date, String dayOfWeek) {
-        validateDayOfWeek(dayOfWeek);
-    }
-
-    private static void validateDayOfWeek(String dayOfWeek) {
-        if (!DAYS_OF_WEEK.contains(dayOfWeek)) {
-            throw new IllegalArgumentException();
-        }
+    public static Day of(int month, int date, String dayOfWeek, boolean isHoliday) {
+        return new Day(month, date, dayOfWeek, isHoliday);
     }
 
     public int getMonth() {
@@ -43,5 +29,9 @@ public class Day {
 
     public String getDayOfWeek() {
         return dayOfWeek;
+    }
+
+    public boolean getHoliday() {
+        return isHoliday;
     }
 }

@@ -11,7 +11,7 @@ public class DataReaderTest {
 
     @Test
     void 휴일_생성_테스트() {
-        List<HolidayDTO> holidays = reader.registerHolidays("holiday.md");
+        List<HolidayDTO> holidays = reader.readHolidays();
 
         assertThat(holidays.get(0).getMonth()).isEqualTo(1);
         assertThat(holidays.get(0).getDate()).isEqualTo(1);

@@ -9,13 +9,15 @@ import oncall.dto.HolidayDTO;
 
 public class DataReader {
 
+    private static final String HOLIDAY_FILE_NAME = "holiday.md";
+
     private static String MD_DELIMITER = ",";
     private static int INDEX_MONTH = 0;
     private static int INDEX_DATE = 1;
 
-    public List<HolidayDTO> registerHolidays(String fileName) {
+    public List<HolidayDTO> readHolidays() {
         ClassLoader classLoader = DataReader.class.getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        InputStream inputStream = classLoader.getResourceAsStream(HOLIDAY_FILE_NAME);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         return reader.lines()
                 .skip(1)
