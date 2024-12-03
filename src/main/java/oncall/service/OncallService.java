@@ -42,14 +42,13 @@ public class OncallService {
         List<String> holidayWorkerNames = new ArrayList<>(holidayWorkers.getNames());
 
         for (Day day : month.getAllDays()) {
+            List<String> workerNames = weekdayWorkerNames;
             if (day.isHoliday() || day.isWeekend()) {
-                swapWorker(lastWorker, holidayWorkerNames);
-                lastWorker = assignWorker(day, holidayWorkerNames);
-                continue;
+                workerNames = holidayWorkerNames;
             }
 
-            swapWorker(lastWorker, weekdayWorkerNames);
-            lastWorker = assignWorker(day, weekdayWorkerNames);
+            swapWorker(lastWorker, workerNames);
+            lastWorker = assignWorker(day, workerNames);
         }
     }
 
