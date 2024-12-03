@@ -22,11 +22,11 @@ public class OncallService {
     }
 
     public void registerWeekdayWorkers(WorkersDTO weekdayWorkers) {
-        this.weekdayWorkers = Workers.of(weekdayWorkers.getWorkers());
+        this.weekdayWorkers = Workers.of(weekdayWorkers.workers());
     }
 
     public void registerHolidayWorkers(WorkersDTO holidayWorkers) {
-        this.holidayWorkers = Workers.of(holidayWorkers.getWorkers());
+        this.holidayWorkers = Workers.of(holidayWorkers.workers());
     }
 
     public void validateWorkers() {
@@ -71,7 +71,7 @@ public class OncallService {
 
     public List<ResultDTO> getResult() {
         return month.getAllDays().stream()
-                .map(day -> new ResultDTO(
+                .map(day -> ResultDTO.of(
                         day.getMonth(),
                         day.getDate(),
                         day.isHoliday(),

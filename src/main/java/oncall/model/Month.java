@@ -25,10 +25,10 @@ public class Month {
         validateMonthInput(monthInputDTO);
 
         List<Day> days = new ArrayList<>();
-        IntStream.range(FIRST_DATE, getLastDate(monthInputDTO.getMonth()) + 1)
+        IntStream.range(FIRST_DATE, getLastDate(monthInputDTO.month()) + 1)
                 .forEach(date -> {
-                    int month = monthInputDTO.getMonth();
-                    String dayOfWeek = getDayOfWeek(date, monthInputDTO.getFirstDayOfWeek());
+                    int month = monthInputDTO.month();
+                    String dayOfWeek = getDayOfWeek(date, monthInputDTO.firstDayOfWeek());
                     boolean isHoliday = isHoliday(month, date, holidayDTOs);
                     days.add(Day.of(month, date, dayOfWeek, isHoliday));
                 });
@@ -37,11 +37,11 @@ public class Month {
     }
 
     private static void validateMonthInput(MonthInputDTO monthInputDTO) {
-        if (monthInputDTO.getMonth() < MIN_MONTH || monthInputDTO.getMonth() > MAX_MONTH) {
+        if (monthInputDTO.month() < MIN_MONTH || monthInputDTO.month() > MAX_MONTH) {
             throw new IllegalArgumentException();
         }
 
-        if (!DAYS_OF_WEEK.contains(monthInputDTO.getFirstDayOfWeek())) {
+        if (!DAYS_OF_WEEK.contains(monthInputDTO.firstDayOfWeek())) {
             throw new IllegalArgumentException();
         }
     }
@@ -58,7 +58,7 @@ public class Month {
     }
 
     private static boolean isHoliday(int month, int date, List<HolidayDTO> holidayDTOs) {
-        return holidayDTOs.stream().anyMatch(holiday -> holiday.getMonth() == month && holiday.getDate() == date);
+        return holidayDTOs.stream().anyMatch(holiday -> holiday.month() == month && holiday.date() == date);
     }
 
     public List<Day> getAllDays() {
