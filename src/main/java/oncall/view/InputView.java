@@ -1,21 +1,25 @@
 package oncall.view;
 
+import static oncall.view.Messages.INPUT_HOLIDAY;
+import static oncall.view.Messages.INPUT_MONTH;
+import static oncall.view.Messages.INPUT_WEEKDAY;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
     public String getWorkingMonth() {
-        System.out.print("비상 근무를 배정할 월과 시작 요일을 입력하세요> ");
+        System.out.print(INPUT_MONTH.getMessage());
         return Console.readLine();
     }
 
     public String getWeekdayWorkers() {
-        System.out.print("평일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
+        System.out.print(INPUT_WEEKDAY.getMessage());
         return Console.readLine();
     }
 
     public String getHolidayWorkers() {
-        System.out.print("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
+        System.out.print(INPUT_HOLIDAY.getMessage());
         return Console.readLine();
     }
 }
