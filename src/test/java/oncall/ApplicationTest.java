@@ -30,6 +30,54 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 너무_많은_근무자_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException(
+                    "4,토",
+                    "허브,쥬니,말랑,라온,헤나,우코,에단,수달,파워,히이로,마코,슬링키,모디,연어,깃짱,리오,고니,박스터,달리,조이,노아이즈,도이,도치,홍고,스캇,폴로,해시,로지,첵스,아이크,우가,푸만능,애쉬,로이스,오션,둥둥둥",
+                    "오션,로이스,애쉬,푸만능,우가,아이크,첵스,로지,해시,폴로,스캇,홍고,도치,도이,노아이즈,조이,달리,박스터,고니,리오,깃짱,연어,모디,슬링키,마코,히이로,파워,수달,에단,우코,헤나,라온,말랑,쥬니,허브,둥둥둥"
+            );
+            assertThat(output()).contains("[ERROR]");
+        });
+    }
+
+    @Test
+    void 너무_적은_근무자_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException(
+                    "4,토",
+                    "허브,쥬니,말랑,라온",
+                    "쥬니,라온,말랑,허브"
+            );
+            assertThat(output()).contains("[ERROR]");
+        });
+    }
+
+    @Test
+    void 근무자_예외_테스트1() {
+        assertSimpleTest(() -> {
+            runException(
+                    "4,토",
+                    "허브,쥬니,말랑,라온,헤나",
+                    "허브,쥬니,라온,말랑,수달"
+            );
+            assertThat(output()).contains("[ERROR]");
+        });
+    }
+
+    @Test
+    void 근무자_예외_테스트2() {
+        assertSimpleTest(() -> {
+            runException(
+                    "4,토",
+                    "허브,말랑,라온,헤나,허브",
+                    "허브,라온,말랑,헤나,허브"
+            );
+            assertThat(output()).contains("[ERROR]");
+        });
+    }
+
+    @Test
     void 기능_테스트() {
         assertSimpleTest(() -> {
             run(
@@ -68,6 +116,25 @@ class ApplicationTest extends NsTest {
                     "4월 28일 금 조이" + LINE_SEPARATOR,
                     "4월 29일 토 해시" + LINE_SEPARATOR,
                     "4월 30일 일 폴로"
+            );
+        });
+    }
+
+    @Test
+    void 기능_테스트2() {
+        assertSimpleTest(() -> {
+            run(
+                    "5,금",
+                    "준팍,수아,루루,글로,솔로스타",
+                    "준팍,수아,루루,글로,솔로스타"
+            );
+            assertThat(output()).contains(
+                    "5월 1일 금 준팍" + LINE_SEPARATOR,
+                    "5월 2일 토 수아" + LINE_SEPARATOR,
+                    "5월 3일 일 준팍" + LINE_SEPARATOR,
+                    "5월 4일 월 수아" + LINE_SEPARATOR,
+                    "5월 5일 화(휴일) 루루" + LINE_SEPARATOR,
+                    "5월 6일 수 글로" + LINE_SEPARATOR
             );
         });
     }
